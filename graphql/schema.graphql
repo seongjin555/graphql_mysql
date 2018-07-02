@@ -6,4 +6,11 @@ type Movies {
 
 type Query {
     movies: [Movies]!
+    movie(id: Int!): Movies
+}
+
+type Mutation {
+    createMovie(name: String!, score: Int!): Movies!
+    deleteMovie(id: Int!): Movies
+    updateMovie(id: Int!, name: String, score: Int): Movies
 }

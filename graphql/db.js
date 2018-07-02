@@ -4,6 +4,7 @@ const sequelize = new Sequelize('graph', 'graph', 'graph', {
     dialect: 'mysql'
 })
 
+// Table
 const MovieModel = sequelize.define('movie', {
     id: {
         type: Sequelize.INTEGER,
@@ -22,10 +23,11 @@ const MovieModel = sequelize.define('movie', {
     tableName: 'movie',
     timestamps: false
 });
-
+// Synchronize table
 sequelize.sync({
-    force: false
+    force: false,
 })
+// Insert dummy data
 .then(() => MovieModel.create({
     name: 'Star wars',
     score: 4
