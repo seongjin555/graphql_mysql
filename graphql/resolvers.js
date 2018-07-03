@@ -2,30 +2,30 @@ const { Movies } = require('./db');
 
 const resolvers = {
     Query: {
-        movies: () => {
-            return Movies.all();
+        movies: async () => {
+            return await Movies.all();
         },
-        movie: (_, args) => {
-            return Movies.find({
+        movie: async (_, args) => {
+            return await Movies.find({
                 where: args
             })
         }
     },
     Mutation: {
-        createMovie: (_, args) => {
-            const movie = Movies.create({
+        createMovie: async (_, args) => {
+            const movie = await Movies.create({
                 name: args.name,
                 score: args.score
             });
             return movie;
         },
-        deleteMovie: (_, args) => {
-            const movie = Movies.destroy({
+        deleteMovie: async (_, args) => {
+            const movie = await Movies.destroy({
                 where: args
             })
             return {id: args.id};
         },
-        updateMovie: (_, args) => {
+        updateMovie: async (_, args) => {
             const data = {};
             if(args.name === undefined) {
                 data.score = args.score;
@@ -35,7 +35,7 @@ const resolvers = {
                 data.name = args.name;
                 data.score = args.score;
             }
-            const movie = Movies.update(data, {
+            const movie = await Movies.update(data, {
                 where: {id: args.id}
             })
             return {id: args.id};
